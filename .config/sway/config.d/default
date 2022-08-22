@@ -193,7 +193,7 @@ bindsym $mod+tab workspace next_on_output
 #
     bindsym $mod+Shift+d exec playerctl play
     bindsym $mod+Shift+f exec playerctl pause
-    bindsym XF86AudioNext exec playerctl next
+    bindsym $mod+Shift+t exec playerctl next
     bindsym XF86AudioPrev exec playerctl previous
 #
 # Backlight
