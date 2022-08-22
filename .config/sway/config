@@ -1,0 +1,25 @@
+# Initial Setup 
+# exec ~/set_once.sh
+
+# Config for sway
+#
+# Read `man 5 sway` for a complete reference.
+
+# user config directory
+include $HOME/.config/sway/config.d/*
+
+# only enable this if every app you use is compatible with wayland
+# xwayland disable
+ exec_always fcitx5 -d --replace
+
+
+exec --no-startup-id swaymgr
+
+
+ input * {
+    xkb_layout "us,de"
+    xkb_options "grp:win_space_toggle"
+}
+
+input <identifier> xkb_model "pc101"
+
