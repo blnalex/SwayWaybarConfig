@@ -1,0 +1,138 @@
+// waybar config
+// 111121
+
+{
+"layer": "top",
+"position": "top",
+"modules-left": ["idle_inhibitor", "cpu", "temperature", "memory", "battery", "disk", "pulseaudio", "custom/spotify", "custom/cap-left"],
+"modules-center": ["sway/workspaces"],
+"modules-right": ["custom/cap-right", "custom/weather", "custom/vpn", "network", "sway/language", "custom/omo", "clock", "custom/offswitch"],
+"sway/window": {
+},
+"custom/weather": {
+  "tooltip": false,
+  "min-length": 5,
+  "exec": "curl 'https://wttr.in/Berlin?m&format='%t''",
+  "interval": 3600,
+},
+"clock": {
+  "format": " {:%a %d %b %H:%M}",
+  "tooltip": false,
+  "min-length": 18,
+},
+"custom/omo": {
+    "exec": "omo get --notify",
+    "on-click": "omo reset",
+    "interval": 1,
+},
+"custom/offswitch": {
+  "tooltip": false,
+  "format": "",
+  "interval": "once",
+  "on-click": "shutdown -h now",
+  "on-click-right": "reboot",
+},
+"network": {
+  "interval": 2,
+  "format-wifi": " {ipaddr}",
+  "format-ethernet": " {ipaddr}",
+  "format-linked": " {ipaddr}",
+  "format-disconnected": " Disconnected",
+  "format-disabled": "",
+  "tooltip": false,
+  "max-length": 20,
+  "min-length": 6,
+},
+"custom/vpn": {
+    "format": " VPN",
+    "exec": "echo '{\"class\": \"connected\"}'",
+    "exec-if": "test -d /proc/sys/net/ipv4/conf/tun0",
+    "return-type": "json",
+    "interval": 2
+},
+"pulseaudio": {
+  "tooltip": false,
+  "min-length": 5,
+  "format": "{icon} {volume}%",
+  "format-bluetooth": "{icon} {volume}%",
+  "format-muted": "MUTE",
+  "on-click": "pavucontrol",
+  "format-icons": {
+  "headphone": "",
+  "headset": "",
+  "default": ["", "", ""]
+  },
+},
+"idle_inhibitor": {
+  "tooltip": false,
+	"format": "{icon}",
+	"format-icons": {
+	"activated": "",
+	"deactivated": "",
+  },
+},
+"cpu": {
+  "interval": 4,
+  "min-length": 6,
+  "format": " {usage}%",
+  "tooltip": false,
+  "states": {
+  "critical": 90,
+  },
+},
+"temperature": {
+  "tooltip": false,
+  "min-length": 5,
+  "critical-threshold": 90,
+  "format": "{icon} {temperatureC}°C",
+  "format-critical": "{icon} {temperatureC}°C",
+  "format-icons": {
+  "default": ["", "", "", "", ""],
+  },
+},
+"memory": {
+  "tooltip": false,
+  "format": " {percentage}%",
+  "states": {
+    "critical":90,
+  },
+  "min-length": 5,
+},
+"disk": {
+  "tooltip": false,
+  "path": "/",
+  "interval": 60,
+  "min-length": 5,
+  "format": " {percentage_used}%",
+  "states": {
+  "critical": 90,
+  },
+},
+"sway/workspaces": {
+  "tooltip": false,
+  "disable-scroll": true,
+},
+"custom/cap-left": {
+  "tooltip": false,
+	"format": "",
+},
+"sway/language": {
+    "format": "{}",
+    "on-click": "swaymsg input type:keyboard xkb_switch_layout next",
+},
+"custom/cap-right": {
+  "tooltip": false,
+	"format": "",
+},
+"custom/spotify": {
+        "format": " {}",
+        "max-length": 40,
+        "on-click": "playerctl pause",
+        "on-click-right": "playerctl play",
+        "on-click-middle": "playerctl next",
+        "exec": "/home/noikha/.config/waybar/scripts/mediaplayer.sh",
+        "exec": "/home/noikha/.config/waybar/scripts/mediaplayer.sh",
+        "interval": 5,
+        "exec-if": "pgrep spotify",
+    },
+}
